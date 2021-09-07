@@ -1,0 +1,60 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="form-control">
+    <label for="monthlyIncome">Monthly Income</label>
+    <input type="text" name="monthlyIncome" formControlName="monthlyIncome" id="monthlyIncome" placeholder="Min. 500" />
+    <div *ngIf="getControl.monthlyIncome.touched && getControl.monthlyIncome.invalid || submitted" class="warning">
+      <div *ngIf="getControl.monthlyIncome.errors?.required">Monthly Income is required.</div>
+      <span class="warnig"
+        *ngIf="getControl.monthlyIncome.touched && getControl.monthlyIncome.errors?.invalidCharacters || getControl.monthlyIncome.errors?.toSmall">
+        {{ getControl.monthlyIncome.errors?.errorMessage }}
+      </span>
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="requestedAmount">Requested Amount</label>
+    <input type="text" name="requestedAmount" formControlName="requestedAmount" id="requestedAmount"
+      placeholder="Min. 20 000" />
+    <div *ngIf="getControl.requestedAmount.touched && getControl.requestedAmount.invalid  || submitted" class="warning">
+      <div *ngIf="getControl.requestedAmount.errors?.required">Requested Amount is required.</div>
+      <span class="warnig"
+        *ngIf="getControl.requestedAmount.touched && getControl.requestedAmount.errors?.invalidCharacters || getControl.requestedAmount.errors?.amountToSmall">
+        {{ getControl.requestedAmount.errors?.errorMessage }}
+      </span>
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="loanTerm">Term of loan repayment (in months)</label>
+    <input type="text" name="loanTerm" formControlName="loanTerm" id="loanTerm"
+      placeholder="Min. 3 years, Max 30 years" />
+    <div *ngIf="getControl.loanTerm.touched && getControl.loanTerm.invalid  || submitted" class="warning">
+      <div *ngIf="getControl.loanTerm.errors?.required">Loan Term is required.</div>
+      <span class="warnig"
+        *ngIf="getControl.loanTerm.touched && getControl.loanTerm.errors?.invalidCharacters || getControl.loanTerm.errors?.wrongTerm">
+        {{ getControl.loanTerm.errors?.errorMessage }}
+      </span>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="children">Children in household</label>
+    <select name="children" formControlName="children" id="children">
+      <option *ngFor="let option of childrenOptions" value="{{option}}">{{option.toLowerCase()}}</option>
+    </select>
+    <div *ngIf="getControl.children.touched && getControl.children.invalid  || submitted" class="warning">
+      <div *ngIf="getControl.children.errors?.required">Monthly Income is required.</div>
+    </div>
+  </div>
+  <div class="form-control">
+    <label for="coapplicant">Coapplicant</label>
+    <select name="coapplicant" formControlName="coapplicant" id="coapplicant">
+      <option *ngFor="let option of coapplicantOptions" value="{{option}}">{{option.replace("_", " ").toLowerCase()}}
+      </option>
+    </select>
+    <div *ngIf="getControl.coapplicant.touched && getControl.coapplicant.invalid  || submitted" class="warning">
+      <div *ngIf="getControl.coapplicant.errors?.required">Monthly Income is required.</div>
+    </div>
+  </div>
+  <div class="flex-container">
+    <input class="btn" type="submit" value="calculate" />
+  </div>
+</form>

@@ -1,0 +1,8 @@
+<div class="container">
+  <app-header></app-header>
+  <div *ngIf="result.loanAmount && !errorResult">You may loan {{ result.loanAmount / 1000 }} with an interestrate of {{
+    result.interestRate / 1000}}
+  </div>
+  <div>{{ errorResult }}</div>
+  <app-form (onCalculateLoan)="calculateLoan($event)"></app-form>
+</div>
